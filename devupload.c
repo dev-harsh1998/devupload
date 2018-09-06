@@ -3,8 +3,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <errno.h>
 
 #define MAX_LEN 50
+#define SUCCESS 0
 
 /* do not let smartpeople with very short password show much brain */
 int smartpeople(char s[])
@@ -14,13 +16,13 @@ int smartpeople(char s[])
     printf("Isn't your password way too short!?\n");
     return -1;
   }
-  return 0;
+  return SUCCESS;
 }
 
 int main(int argc, char *argv[])
 {
-  int afh = 0;
-  int bkb = 0;
+  int afh = SUCCESS;
+  int bkb = SUCCESS;
   int index;
   int c;
   char cmdbuf[256];
@@ -35,7 +37,7 @@ int main(int argc, char *argv[])
     printf("ERROR: This binary expects atleast and only 2 command "
            "line argument\n");
     /* bail out */
-    return -1;
+    return -ENAVAIL;
   }
 
   /* Derpy implementation of getopt () */
@@ -55,7 +57,7 @@ int main(int argc, char *argv[])
         fprintf(stderr,
                 "Unknown option character `\\x%x'.\n",
                 optopt);
-      return 1;
+      return -ENAVAIL;
     default:
       abort();
     }
@@ -98,9 +100,12 @@ int main(int argc, char *argv[])
   {
     /* For some extra smart people */
     for (index = optind; index < argc; index++)
-      printf("Non-option argument %s\n", argv[index]);
-    return 0;
+    {
+      printf("No valid argument supplied %s\n", argv[index]);
+      break;
+      return -ENODATA;
+    }
   }
 
-  return 0;
+  return SUCCESS;
 }
