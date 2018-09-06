@@ -6,9 +6,15 @@
 
 #define MAX_LEN 50
 
-/* Initial magic */
-inline void uploader(char s[]){
-    system(s);
+/* do not let smartpeople with very short password show much brain */
+int smartpeople(char s[])
+{
+  if (strlen(s) < 2)
+  {
+    printf("Isn't your password way too short!?\n");
+    return -1;
+  }
+  return 0;
 }
 
 int main(int argc, char *argv[])
@@ -60,8 +66,15 @@ int main(int argc, char *argv[])
     printf("Input your androidfilehost username: ");
     scanf("%s", uname);
     password = getpass("Input your androidfilehost password: ");
-    sprintf(cmdbuf, "curl -T %s ftp://uploads.androidfilehost.com --user %s:%s", argv[2], uname, password);
-    uploader(cmdbuf);
+    if (smartpeople(password) == -1)
+    {
+      exit(1);
+    }
+    else
+    {
+      sprintf(cmdbuf, "curl -T %s ftp://uploads.androidfilehost.com --user %s:%s", argv[2], uname, password);
+      system(cmdbuf);
+    }
   }
 
   else if (bkb)
@@ -70,8 +83,15 @@ int main(int argc, char *argv[])
     printf("Input your basketbuild username: ");
     scanf("%s", uname);
     password = getpass("Input your basketbuild password: ");
-    sprintf(cmdbuf, "curl -T %s ftp://basketbuild.com --user %s:%s", argv[2], uname, password);
-    uploader(cmdbuf);
+    if (smartpeople(password) == -1)
+    {
+      exit(1);
+    }
+    else
+    {
+      sprintf(cmdbuf, "curl -T %s ftp://basketbuild.com --user %s:%s", argv[2], uname, password);
+      system(cmdbuf);
+    }
   }
 
   else
