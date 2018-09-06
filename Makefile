@@ -1,3 +1,9 @@
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# Copyright (C) 2018, Harshit Jain
+#
+
 CC ?= gcc
 CLANG_FORMAT ?= clang-format
 
