@@ -79,6 +79,7 @@ int main(int argc, char *argv[])
 {
   int afh = SUCCESS;
   int bkb = SUCCESS;
+  int tfr = SUCCESS;
   int index;
   int c;
   char cmdbuf[256];
@@ -102,7 +103,7 @@ int main(int argc, char *argv[])
     }
 
     /* Derpy implementation of getopt () */
-    while ((c = getopt(argc, argv, "ab")) != -1)
+    while ((c = getopt(argc, argv, "abt")) != -1)
       switch (c)
       {
       case 'a':
@@ -110,6 +111,9 @@ int main(int argc, char *argv[])
         break;
       case 'b':
         bkb = 1;
+        break;
+      case 't':
+        tfr = 1;
         break;
       case '?':
         if (isprint(optopt))
@@ -157,6 +161,22 @@ int main(int argc, char *argv[])
       }
     }
 
+    else if (tfr)
+    {
+      printf("Checking for transfer\n");
+      const char check_tfr[9] = "transfer";
+      if (can_run_command(check_tfr))
+      {
+        sprintf(cmdbuf, "transfer %s", argv[2]);
+        system(cmdbuf);
+      }
+      else
+      {
+        printf("transfer isn't found in your system install it\n");
+        printf("Get transfer from :- https://github.com/dev-harsh1998/Transfer");
+        return -ENFILE;
+      }
+    }
     else
     {
       /* For some extra smart people */
@@ -174,7 +194,8 @@ int main(int argc, char *argv[])
   else
   {
     printf("ERROR: CURL IS SOLE DEPENDENCY THIS BINARY WON'T RUN WITHOUT IT\n");
-    printf("If this message is on your screen, then your curl binary is either corrupt or not installed!");
+    printf("If this message is on your screen, then your curl binary is either corrupt or not installed!\n");
+    printf("To install curl run 'sudo apt install curl'");
     return -ENAVAIL;
   }
 
