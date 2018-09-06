@@ -6,6 +6,11 @@
 
 #define MAX_LEN 50
 
+/* Initial magic */
+inline void uploader(char s[]){
+    system(s);
+}
+
 int main(int argc, char *argv[])
 {
   int afh = 0;
@@ -56,6 +61,7 @@ int main(int argc, char *argv[])
     scanf("%s", uname);
     password = getpass("Input your androidfilehost password: ");
     sprintf(cmdbuf, "curl -T %s ftp://uploads.androidfilehost.com --user %s:%s", argv[2], uname, password);
+    uploader(cmdbuf);
   }
 
   else if (bkb)
@@ -65,6 +71,7 @@ int main(int argc, char *argv[])
     scanf("%s", uname);
     password = getpass("Input your basketbuild password: ");
     sprintf(cmdbuf, "curl -T %s ftp://basketbuild.com --user %s:%s", argv[2], uname, password);
+    uploader(cmdbuf);
   }
 
   else
