@@ -189,9 +189,8 @@ int main(int argc, char *argv[])
       for (index = optind; index < argc; index++)
       {
         printf("No valid argument supplied %s\n", argv[index]);
-        break;
-        return -ENODATA;
       }
+      return -ENODATA;
     }
 
     return SUCCESS;
