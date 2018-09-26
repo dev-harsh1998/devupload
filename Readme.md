@@ -1,5 +1,7 @@
 # Devupload [ ![Codeship Status for dev-harsh1998/devupload](https://app.codeship.com/projects/9fbb3a80-9408-0136-80de-523f16cd0e8f/status?branch=master)](https://app.codeship.com/projects/304609)
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6034a261cd064590a40030810b8ac0bd)](https://app.codacy.com/app/dev-harsh1998/devupload?utm_source=github.com&utm_medium=referral&utm_content=dev-harsh1998/devupload&utm_campaign=Badge_Grade_Dashboard)
+
 devupload is a command line utility built as a wrapper around cURL & [Transfer](https://github.com/dev-harsh198/Transfer) for the purpose to ease the uploading of files to various available free file host services. It abstracts away all the manual cURL & Transfer syntax to make usage effortless.
 
 ## How to use?
