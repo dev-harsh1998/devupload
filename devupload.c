@@ -137,7 +137,8 @@ int main(int argc, char *argv[])
     {
       printf("Uploading file to androidfilehost keep your username and password handy\n");
       printf("Input your androidfilehost username: ");
-      scanf("%s", uname);
+      fgets(uname, MAX_LEN, stdin);
+      uname[strcspn(uname, "\n")] = 0;
       password = getpass("Input your androidfilehost password: ");
       if (smartpeople(password) == -1)
       {
@@ -154,7 +155,8 @@ int main(int argc, char *argv[])
     {
       printf("Uploading file to basketbuild keep your password handy\n");
       printf("Input your basketbuild username: ");
-      scanf("%s", uname);
+      fgets(uname, MAX_LEN, stdin);
+      uname[strcspn(uname, "\n")] = 0;
       password = getpass("Input your basketbuild password: ");
       if (smartpeople(password) == -1)
       {
